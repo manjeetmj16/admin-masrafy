@@ -7,25 +7,28 @@ import { useForm } from 'react-hook-form';
 const Ads = () => {
     const [selectedImage, setSelectedImage] = useState("/images/default.png");
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setSelectedImage(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-  
-    const handleRemoveImage = () => {
-        setSelectedImage("/images/default.png");
-    };
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (data) => {
-        console.log(data);
-    };
+  const handleRemoveImage = () => {
+    setSelectedImage("/images/default.png");
+  };
+
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm({
+    mode: 'onChange',
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
 return (
     <>
@@ -38,8 +41,8 @@ return (
                             <div className='col-lg-6'>
                                 <div className='mas_input_box'>
                                     <label>Heading</label>
-                                    <input type="text" placeholder='Banking Start Here'{...register('name', { required: true })} />
-                                    {errors.name && <p>required</p>}
+                                    <input type="text" placeholder='Banking Start Here'{...register('heading', { required: true })} />
+                                    {errors.name && <p>Required</p>}
                                 </div>
                                 <div className='mas_banner_image_wrapper'>
                                     <div className='mas_banner_section'>
@@ -74,7 +77,7 @@ return (
                                 <div className='mas_input_box'>
                                     <label>Paragraph</label>
                                     <textarea placeholder='Paragraph here'
-                                    {...register('message', { 
+                                    {...register('paragraph-text', { 
                                         required: true, 
                                         minLength: {
                                         value: 10,
@@ -82,26 +85,26 @@ return (
                                         } 
                                     })}
                                     />
-                                    {errors.message && <p>{errors.message.message || 'message is required'}</p>}
+                                    {errors.message && <p>{errors.message.message || 'Required'}</p>}
                                 </div>
                             </div>
                             <div className='col-lg-6'>
                                 <div className='mas_input_box'>
                                     <label>Primary Button Text</label>
-                                    <input type="text" placeholder='Open account'{...register('name', { required: true })} />
-                                    {errors.name && <p>required</p>}
+                                    <input type="text" placeholder='Open account'{...register('primary-button-text', { required: true })} />
+                                    {errors.name && <p>Required</p>}
                                 </div>
                                 </div>
                                 <div className='col-lg-6'>
                                 <div className='mas_input_box'>
                                     <label>Secondary Button Text</label>
-                                    <input type="text" placeholder='Offerings'{...register('name', { required: true })} />
-                                    {errors.name && <p>required</p>}
+                                    <input type="text" placeholder='Offerings'{...register('secondary-button-text', { required: true })} />
+                                    {errors.name && <p>Required</p>}
                                 </div>
                             </div>
                             <div className='col-lg-12'>
                                 <div className='mas_btn_wrapper'>
-                                    <button type='submit' className='mas_btn'>Save Changes</button>
+                                    <button type='submit' className='mas_btn' disabled={!isValid}>Save Changes</button>
                                 </div>
                             </div>
                         </div>

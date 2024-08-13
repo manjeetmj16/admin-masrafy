@@ -1,28 +1,30 @@
-"use client"
-import React from 'react'
-import { useState } from 'react'
-import { Accordion } from 'react-bootstrap'
+"use client";
+import React, { useState } from 'react';
+import { Accordion } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
 const Banner = () => {
-    const [selectedImage, setSelectedImage] = useState("/images/default.png");
+  const [selectedImage, setSelectedImage] = useState("/images/default.png");
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setSelectedImage(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-  
-    const handleRemoveImage = () => {
-        setSelectedImage("/images/default.png");
-};
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const handleRemoveImage = () => {
+    setSelectedImage("/images/default.png");
+  };
+
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm({
+    mode: 'onChange',
+  });
+
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -37,8 +39,8 @@ const Banner = () => {
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Heading</label>
-                    <input type="text" placeholder='Banking Start Here'{...register('name', { required: true })} />
-                    {errors.name && <p>required</p>}
+                    <input type="text" placeholder='Banking Start Here'{...register('heading', { required: true })} />
+                    {errors.name && <p>Required</p>}
                   </div>
                   <div className='mas_banner_image_wrapper'>
                       <div className='mas_banner_section'>
@@ -73,7 +75,7 @@ const Banner = () => {
                   <div className='mas_input_box'>
                     <label>Paragraph</label>
                     <textarea placeholder='Paragraph here'
-                      {...register('message', { 
+                      {...register('paragraph-text', { 
                         required: true, 
                         minLength: {
                           value: 10,
@@ -81,54 +83,54 @@ const Banner = () => {
                         } 
                       })}
                     />
-                    {errors.message && <p>{errors.message.message || 'message is required'}</p>}
+                    {errors.message && <p>{errors.message.message || 'Required'}</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Features Text 01</label>
-                    <input type="text" placeholder='Instant Transfer'{...register('name', { required: true })} />
-                    {errors.name && <p>required</p>}
+                    <input type="text" placeholder='Instant Transfer'{...register('features-text-one', { required: true })} />
+                    {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Features Text 02</label>
-                    <input type="text" placeholder='Payments worldwide'{...register('name', { required: true })} />
-                    {errors.name && <p>required</p>}
+                    <input type="text" placeholder='Payments worldwide'{...register('features-text-two', { required: true })} />
+                    {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Features Text 03</label>
-                    <input type="text" placeholder='Saving accounts'{...register('name', { required: true })} />
-                    {errors.name && <p>required</p>}
+                    <input type="text" placeholder='Saving accounts'{...register('features-text-three', { required: true })} />
+                    {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Features Text 04</label>
-                    <input type="text" placeholder='100% mobile banking'{...register('name', { required: true })} />
-                    {errors.name && <p>required</p>}
+                    <input type="text" placeholder='100% mobile banking'{...register('features-text-four', { required: true })} />
+                    {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Primary Button Text</label>
-                    <input type="text" placeholder='Open account'{...register('name', { required: true })} />
-                    {errors.name && <p>required</p>}
+                    <input type="text" placeholder='Open account'{...register('primary-button-text', { required: true })} />
+                    {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Secondary Button Text</label>
-                    <input type="text" placeholder='Offerings'{...register('name', { required: true })} />
-                    {errors.name && <p>required</p>}
+                    <input type="text" placeholder='Offerings'{...register('secondary-button-text', { required: true })} />
+                    {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-12'>
                   <div className='mas_btn_wrapper'>
-                    <button type='submit' className='mas_btn'>Save Changes</button>
+                    <button type='submit' className='mas_btn' disabled={!isValid}>Save Changes</button>
                   </div>
                 </div>
               </div>
