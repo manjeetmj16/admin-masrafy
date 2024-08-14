@@ -2,8 +2,17 @@
 import React, { useState } from 'react';
 import { Accordion } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { useEffect, useRef } from 'react';
 
 const Banner = () => {
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    // Component ke mount hone par input field par focus set karna
+    inputRef.current.focus();
+  }, []);
+
   const [selectedImage, setSelectedImage] = useState("/images/default.png");
 
   const handleImageChange = (event) => {
@@ -39,7 +48,7 @@ const Banner = () => {
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Heading</label>
-                    <input type="text" placeholder='Banking Start Here'{...register('heading', { required: true })} />
+                    <input type="text" placeholder='Banking Start Here'{...register('heading', { required: true })} ref={inputRef}/>
                     {errors.name && <p>Required</p>}
                   </div>
                   <div className='mas_banner_image_wrapper'>

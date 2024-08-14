@@ -6,20 +6,15 @@ import { useForm } from 'react-hook-form';
 const LoginPage = () => {
   const [showToaster, setShowToaster] = useState(false);
   const [toasterSuccess, setToasterSuccess] = useState(true);
-  
   const { register, handleSubmit, formState: { errors } } = useForm();
-  
-  // Initialize the useRouter hook
   const router = useRouter();
-
   const onSubmit = (data) => {
     const validEmail = "irfan.shaikh@pixelnx.com";
     const validPassword = "123";
-
     if (data.email === validEmail && data.password === validPassword) {
       setToasterSuccess(true);
       setShowToaster(true);
-      router.push("/app/home"); // Use router here for navigation
+      router.push("/app/home");
     } else {
       setToasterSuccess(false);
       setShowToaster(true);
@@ -54,7 +49,7 @@ const LoginPage = () => {
                           />
                           {errors.email && <span className="error">Email is required</span>}
                             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5.83332 5.08333L8.28501 6.53283C9.71432 7.37792 10.2857 7.37792 11.715 6.53283L14.1667 5.08333M1.6798 9.22966C1.73427 11.7843 1.76151 13.0616 2.70412 14.0078C3.64672 14.954 4.9586 14.9869 7.58235 15.0528C9.19941 15.0935 10.8006 15.0935 12.4177 15.0528C15.0414 14.9869 16.3532 14.954 17.2959 14.0078C18.2385 13.0616 18.2657 11.7843 18.3202 9.22966C18.3377 8.40825 18.3377 7.59175 18.3202 6.77033C18.2657 4.21571 18.2385 2.93841 17.2959 1.99222C16.3532 1.04602 15.0414 1.01307 12.4177 0.94714C10.8006 0.906507 9.19941 0.906507 7.58234 0.947132C4.9586 1.01305 3.64672 1.04601 2.70411 1.99221C1.76151 2.9384 1.73427 4.21571 1.67979 6.77033C1.66227 7.59175 1.66228 8.40825 1.6798 9.22966Z" stroke="#B0A9B5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5.83332 5.08333L8.28501 6.53283C9.71432 7.37792 10.2857 7.37792 11.715 6.53283L14.1667 5.08333M1.6798 9.22966C1.73427 11.7843 1.76151 13.0616 2.70412 14.0078C3.64672 14.954 4.9586 14.9869 7.58235 15.0528C9.19941 15.0935 10.8006 15.0935 12.4177 15.0528C15.0414 14.9869 16.3532 14.954 17.2959 14.0078C18.2385 13.0616 18.2657 11.7843 18.3202 9.22966C18.3377 8.40825 18.3377 7.59175 18.3202 6.77033C18.2657 4.21571 18.2385 2.93841 17.2959 1.99222C16.3532 1.04602 15.0414 1.01307 12.4177 0.94714C10.8006 0.906507 9.19941 0.906507 7.58234 0.947132C4.9586 1.01305 3.64672 1.04601 2.70411 1.99221C1.76151 2.9384 1.73427 4.21571 1.67979 6.77033C1.66227 7.59175 1.66228 8.40825 1.6798 9.22966Z" stroke="#B0A9B5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                         </div>
                       </div>
@@ -86,18 +81,18 @@ const LoginPage = () => {
 
       {showToaster && (
         <div className={`mas_success_msg toster_open ${toasterSuccess ? '' : 'error'}`}>
-          <div className="mas_close_icon" onClick={() => setShowToaster(false)}>
-            <span>×</span>
-          </div>
-          <div className="mas_success_flex">
-            <div className="mas_success_img">
-              <img src={toasterSuccess ? "/images/success.png" : "/images/error.png"} alt="" />
+            <div className="mas_close_icon" onClick={() => setShowToaster(false)}>
+              <span>×</span>
             </div>
-            <div className="mas_text_msg">
-              <h5>{toasterSuccess ? 'Great Success!' : 'Login Failed!'}</h5>
-              <p>{toasterSuccess ? 'Congratulations, you have successfully logged in.' : 'Incorrect email or password. Please try again.'}</p>
+            <div className="mas_success_flex">
+              <div className="mas_success_img">
+                <img src={toasterSuccess ? "/images/success.png" : "/images/error.png"} alt="" />
+              </div>
+              <div className="mas_text_msg">
+                <h5>{toasterSuccess ? 'Great Success!' : 'Login Failed!'}</h5>
+                <p>{toasterSuccess ? 'Congratulations, you have successfully logged in.' : 'Incorrect email or password. Please try again.'}</p>
+              </div>
             </div>
-          </div>
         </div>
       )}
     </>

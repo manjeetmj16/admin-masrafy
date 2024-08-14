@@ -10,7 +10,6 @@ import Footer from './home/Footer'
 import About from './home/About'
 
 const home = () => {
-
   return (
     <>
         <div className='mas_main_wrapper'>

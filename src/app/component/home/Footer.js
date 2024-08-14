@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import { Accordion } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 
@@ -18,7 +17,7 @@ const Footer = () => {
     };
 
     const handleBlur = (e) => {
-    e.target.contentEditable = false; 
+        e.target.contentEditable = false; 
     };
     
   return (
@@ -49,55 +48,41 @@ const Footer = () => {
                                     <div className='mas_footer_links'>
                                         <ul>
                                             <li>
-                                            <Link href="javascript:">
                                                 <span onDoubleClick={handleDoubleClick} onBlur={handleBlur}>
                                                     About Us
                                                 </span>
-                                            </Link>
                                             </li>
                                             <li>
-                                            <Link href="javascript:">
                                                 <span onDoubleClick={handleDoubleClick} onBlur={handleBlur}>
                                                     Press
                                                 </span>
-                                            </Link>
                                             </li>
                                             <li>
-                                            <Link href="javascript:">
                                                 <span onDoubleClick={handleDoubleClick} onBlur={handleBlur}>
                                                     Investor Relations
                                                 </span>
-                                            </Link>
                                             </li>
                                         </ul>
                                         <ul>
                                             <li>
-                                            <Link href="javascript:">
                                                 <span onDoubleClick={handleDoubleClick} onBlur={handleBlur}>
                                                     Support
                                                 </span>
-                                            </Link>
                                             </li>
                                             <li>
-                                            <Link href="javascript:">
                                                 <span onDoubleClick={handleDoubleClick} onBlur={handleBlur}>
                                                     Privacy Policy
                                                 </span>
-                                            </Link>
                                             </li>
                                             <li>
-                                            <Link href="javascript:">
                                                 <span onDoubleClick={handleDoubleClick} onBlur={handleBlur}>
                                                     Play store
                                                 </span>
-                                            </Link>
                                             </li>
                                             <li>
-                                            <Link href="javascript:">
                                                 <span onDoubleClick={handleDoubleClick} onBlur={handleBlur}>
                                                     App store
                                                 </span>
-                                            </Link>
                                             </li>
                                         </ul>
                                     </div>
