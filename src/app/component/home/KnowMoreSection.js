@@ -5,7 +5,7 @@ import { Accordion } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 
 const KnowMoreSection = () => {
-    const [selectedImage, setSelectedImage] = useState("/images/default.png");
+  const [selectedImage, setSelectedImage] = useState("/images/default.png");
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];

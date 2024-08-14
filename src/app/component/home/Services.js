@@ -2,8 +2,6 @@ import React from 'react'
 import { Accordion } from 'react-bootstrap'
 import { useForm } from 'react-hook-form';
 
-
-    
 const Services = () => {
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         mode: 'onChange',

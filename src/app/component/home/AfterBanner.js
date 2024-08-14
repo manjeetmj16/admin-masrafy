@@ -3,16 +3,14 @@ import { Accordion } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 
 const AfterBanner = () => {
-   
     const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         mode: 'onChange',
     });
-    
     const onSubmit = (data) => {
         console.log(data);
     };
 
-  return (
+    return (
     <>
         <Accordion.Item eventKey="1">
             <Accordion.Header>After Banner</Accordion.Header>
@@ -107,7 +105,7 @@ const AfterBanner = () => {
             </Accordion.Body>
         </Accordion.Item>
     </>
-  )
+    )
 }
 
 export default AfterBanner
