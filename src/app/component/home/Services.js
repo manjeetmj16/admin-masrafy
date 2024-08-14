@@ -9,6 +9,34 @@ const Services = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        let updateData = {
+            main_heading: data.mainheading,
+            main_paragragph: data.mainparagraph,
+            service01_heading: data.serviceheadingone,
+            service01_paragragph: data.serviceparagraphone,
+            service02_heading: data.serviceheadingtwo,
+            service02_paragragph: data.serviceparagraphtwo,
+            service03_heading: data.serviceheadingthree,
+            service03_paragragph: data.serviceparagraphthree,
+            service04_heading: data.serviceheadingfour,
+            service04_paragragph: data.serviceparagraphfour,
+            type: "service"
+        };
+
+        fetch('http://localhost:3000/api/admin/updateadminmodule',
+        {
+            method: 'post',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateData)
+        })
+        .then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log("data",data)
+        });
     };
   return (
     <>
@@ -21,14 +49,14 @@ const Services = () => {
                         <div className='col-lg-6'>
                             <div className='mas_input_box'>
                                 <label>Main Heading</label>
-                                <input type="text" placeholder='Leading Business Solutions.'{...register('main-heading', { required: true })} />
+                                <input type="text" placeholder='Leading Business Solutions.'{...register('mainheading', { required: true })} />
                                 {errors.name && <p>Required</p>}
                             </div>
                         </div>
                         <div className='col-lg-6'>
                             <div className='mas_input_box'>
                                 <label>Main Paragraph</label>
-                                <input type="text" placeholder='Trade, Loans, Investments, Government...'{...register('main-paragraph', { required: true })} />
+                                <input type="text" placeholder='Trade, Loans, Investments, Government...'{...register('mainparagraph', { required: true })} />
                                 {errors.name && <p>Required</p>}
                             </div>
                         </div>
@@ -38,14 +66,14 @@ const Services = () => {
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Heading</label>
-                                        <input type="text" placeholder='100% mobile banking'{...register('service-heading-one', { required: true })} />
+                                        <input type="text" placeholder='100% mobile banking'{...register('serviceheadingone', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph here'{...register('service-paragraph-one', { required: true })} />
+                                        <input type="text" placeholder='Paragraph here'{...register('serviceparagraphone', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
@@ -57,14 +85,14 @@ const Services = () => {
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Heading</label>
-                                        <input type="text" placeholder='100% mobile banking'{...register('service-heading-two', { required: true })} />
+                                        <input type="text" placeholder='100% mobile banking'{...register('serviceheadingtwo', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph here'{...register('service-paragraph-two', { required: true })} />
+                                        <input type="text" placeholder='Paragraph here'{...register('serviceparagraphtwo', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
@@ -76,14 +104,14 @@ const Services = () => {
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Heading</label>
-                                        <input type="text" placeholder='100% mobile banking'{...register('service-heading-three', { required: true })} />
+                                        <input type="text" placeholder='100% mobile banking'{...register('serviceheadingthree', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph here'{...register('service-paragraph-three', { required: true })} />
+                                        <input type="text" placeholder='Paragraph here'{...register('serviceparagraphthree', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
@@ -95,14 +123,14 @@ const Services = () => {
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Heading</label>
-                                        <input type="text" placeholder='100% mobile banking'{...register('service-heading-four', { required: true })} />
+                                        <input type="text" placeholder='100% mobile banking'{...register('serviceheadingfour', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph here'{...register('service-paragraph-four', { required: true })} />
+                                        <input type="text" placeholder='Paragraph here'{...register('serviceparagraphfour', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>

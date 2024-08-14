@@ -28,6 +28,28 @@ const Ads = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    let updateData = {
+        heading: data.heading,
+        paragragph: data.paragraphtext,
+        banner_image: selectedImage,
+        primary_btntext: data.primarybuttontext,
+        secondary_btntext: data.secondarybuttontext,
+        type: "ads"
+    };
+    fetch('http://localhost:3000/api/admin/updateadminmodule',
+    {
+        method: 'post',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateData)
+    })
+    .then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        console.log("data",data)
+    });
   };
 
 return (
@@ -77,7 +99,7 @@ return (
                                 <div className='mas_input_box'>
                                     <label>Paragraph</label>
                                     <textarea placeholder='Paragraph here'
-                                    {...register('paragraph-text', { 
+                                    {...register('paragraphtext', { 
                                         required: true, 
                                         minLength: {
                                         value: 10,
@@ -91,14 +113,14 @@ return (
                             <div className='col-lg-6'>
                                 <div className='mas_input_box'>
                                     <label>Primary Button Text</label>
-                                    <input type="text" placeholder='Open account'{...register('primary-button-text', { required: true })} />
+                                    <input type="text" placeholder='Open account'{...register('primarybuttontext', { required: true })} />
                                     {errors.name && <p>Required</p>}
                                 </div>
                                 </div>
                                 <div className='col-lg-6'>
                                 <div className='mas_input_box'>
                                     <label>Secondary Button Text</label>
-                                    <input type="text" placeholder='Offerings'{...register('secondary-button-text', { required: true })} />
+                                    <input type="text" placeholder='Offerings'{...register('secondarybuttontext', { required: true })} />
                                     {errors.name && <p>Required</p>}
                                 </div>
                             </div>

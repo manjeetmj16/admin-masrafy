@@ -8,6 +8,32 @@ const AfterBanner = () => {
     });
     const onSubmit = (data) => {
         console.log(data);
+        let updateData = {
+            heading1: data.headingone,
+            paragragph1: data.paragraphone,
+            heading2: data.headingtwo,
+            paragragph2: data.paragraphtwo,
+            heading3: data.headingthree,
+            paragragph3: data.paragraphthree,
+            heading4: data.headingfour,
+            paragragph4: data.paragraphfour,
+            type: "afterBanner"
+        };
+
+        fetch('http://localhost:3000/api/admin/updateadminmodule',
+        {
+            method: 'post',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateData)
+        })
+        .then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log("data",data)
+        });
     };
 
     return (
@@ -24,14 +50,14 @@ const AfterBanner = () => {
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Heading</label>
-                                        <input type="text" placeholder='Heading Here'{...register('heading-one', { required: true })} />
+                                        <input type="text" placeholder='Heading Here'{...register('headingone', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph Here'{...register('paragraph-one', { required: true })} />
+                                        <input type="text" placeholder='Paragraph Here'{...register('paragraphone', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
@@ -43,14 +69,14 @@ const AfterBanner = () => {
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Heading</label>
-                                        <input type="text" placeholder='Heading Here'{...register('heading-two', { required: true })} />
+                                        <input type="text" placeholder='Heading Here'{...register('headingtwo', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph Here'{...register('paragraph-two', { required: true })} />
+                                        <input type="text" placeholder='Paragraph Here'{...register('paragraphtwo', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
@@ -62,14 +88,14 @@ const AfterBanner = () => {
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Heading</label>
-                                        <input type="text" placeholder='Heading Here'{...register('heading-three', { required: true })} />
+                                        <input type="text" placeholder='Heading Here'{...register('headingthree', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph Here'{...register('paragraph-three', { required: true })} />
+                                        <input type="text" placeholder='Paragraph Here'{...register('paragraphthree', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
@@ -81,14 +107,14 @@ const AfterBanner = () => {
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Heading</label>
-                                        <input type="text" placeholder='Heading Here'{...register('heading-four', { required: true })} />
+                                        <input type="text" placeholder='Heading Here'{...register('headingfour', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>
                                 <div className='col-lg-6'>
                                     <div className='mas_input_box'>
                                         <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph Here'{...register('paragraph-four', { required: true })} />
+                                        <input type="text" placeholder='Paragraph Here'{...register('paragraphfour', { required: true })} />
                                         {errors.name && <p>Required</p>}
                                     </div>
                                 </div>

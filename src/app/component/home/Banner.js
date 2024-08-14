@@ -2,17 +2,8 @@
 import React, { useState } from 'react';
 import { Accordion } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { useEffect, useRef } from 'react';
 
 const Banner = () => {
-
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    // Component ke mount hone par input field par focus set karna
-    inputRef.current.focus();
-  }, []);
-
   const [selectedImage, setSelectedImage] = useState("/images/default.png");
 
   const handleImageChange = (event) => {
@@ -36,7 +27,36 @@ const Banner = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    let bannerData = {
+      id:"66bc890bc8bbe7a144e3e92d",
+      heading: data.heading,
+      paragragph: data.paragraphtext,
+      banner_image: selectedImage,
+      feature_text1: data.featurestextone,
+      feature_text2: data.featurestexttwo,
+      feature_text3: data.featurestextthree,
+      feature_text4: data.featurestextfour,
+      primary_btntext:data.primarybuttontext ,
+      secondary_btntext: data.secondarybuttontext,
+      type: "banner"
+    }
+
+    fetch('http://localhost:3000/api/admin/updateadminmodule',
+    {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bannerData)
+    })
+    .then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log("data",data)
+    });
   };
+
 
   return (
     <Accordion.Item eventKey="0">
@@ -48,7 +68,7 @@ const Banner = () => {
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Heading</label>
-                    <input type="text" placeholder='Banking Start Here'{...register('heading', { required: true })} ref={inputRef}/>
+                    <input type="text" placeholder='Banking Start Here'{...register('heading', { required: true })} />
                     {errors.name && <p>Required</p>}
                   </div>
                   <div className='mas_banner_image_wrapper'>
@@ -84,7 +104,7 @@ const Banner = () => {
                   <div className='mas_input_box'>
                     <label>Paragraph</label>
                     <textarea placeholder='Paragraph here'
-                      {...register('paragraph-text', { 
+                      {...register('paragraphtext', { 
                         required: true, 
                         minLength: {
                           value: 10,
@@ -98,42 +118,42 @@ const Banner = () => {
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Features Text 01</label>
-                    <input type="text" placeholder='Instant Transfer'{...register('features-text-one', { required: true })} />
+                    <input type="text" placeholder='Instant Transfer'{...register('featurestextone', { required: true })} />
                     {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Features Text 02</label>
-                    <input type="text" placeholder='Payments worldwide'{...register('features-text-two', { required: true })} />
+                    <input type="text" placeholder='Payments worldwide'{...register('featurestexttwo', { required: true })} />
                     {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Features Text 03</label>
-                    <input type="text" placeholder='Saving accounts'{...register('features-text-three', { required: true })} />
+                    <input type="text" placeholder='Saving accounts'{...register('featurestextthree', { required: true })} />
                     {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Features Text 04</label>
-                    <input type="text" placeholder='100% mobile banking'{...register('features-text-four', { required: true })} />
+                    <input type="text" placeholder='100% mobile banking'{...register('featurestextfour', { required: true })} />
                     {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Primary Button Text</label>
-                    <input type="text" placeholder='Open account'{...register('primary-button-text', { required: true })} />
+                    <input type="text" placeholder='Open account'{...register('primarybuttontext', { required: true })} />
                     {errors.name && <p>Required</p>}
                   </div>
                 </div>
                 <div className='col-lg-6'>
                   <div className='mas_input_box'>
                     <label>Secondary Button Text</label>
-                    <input type="text" placeholder='Offerings'{...register('secondary-button-text', { required: true })} />
+                    <input type="text" placeholder='Offerings'{...register('secondarybuttontext', { required: true })} />
                     {errors.name && <p>Required</p>}
                   </div>
                 </div>

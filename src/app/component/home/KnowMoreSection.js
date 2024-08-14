@@ -28,6 +28,27 @@ const KnowMoreSection = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    let updateData = {
+        heading: data.heading,
+        paragragph: data.paragraphtext,
+        banner_image: selectedImage,
+        button_text: data.buttontext,
+        type: "knowMoreSection"
+    };
+    fetch('http://localhost:3000/api/admin/updateadminmodule',
+    {
+        method: 'post',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateData)
+    })
+    .then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        console.log("data",data)
+    });
   };
 
 return (
@@ -74,7 +95,7 @@ return (
                             </div>
                             <div className='mas_input_box'>
                                 <label>Button Text</label>
-                                <input type="text" placeholder='Know More'{...register('button-text', { required: true })} />
+                                <input type="text" placeholder='Know More'{...register('buttontext', { required: true })} />
                                 {errors.name && <p>Required</p>}
                             </div>
                         </div>
@@ -82,7 +103,7 @@ return (
                             <div className='mas_input_box mas_textarea_box'>
                                 <label>Paragraph</label>
                                 <textarea placeholder='Paragraph here'
-                                {...register('paragraph-text', { 
+                                {...register('paragraphtext', { 
                                     required: true, 
                                     minLength: {
                                     value: 10,
