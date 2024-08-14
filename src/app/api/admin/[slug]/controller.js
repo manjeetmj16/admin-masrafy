@@ -1,6 +1,7 @@
 
 import Common from "@/app/app/helper.js/Common";
 import Admin from "@/app/app/models/Admin";
+import User from "@/app/app/models/User";
 import dbConnection from '@/app/utils/dbconnects'
 
 let banner = ["heading", "paragragph", "banner_image", "feature_text1", "feature_text2", "feature_text3", "feature_text4", "primary_btntext", "secondary_btntext"]
@@ -11,59 +12,108 @@ let knowMoreSection = ["heading", "paragragph", "banner_image", "button_text"]
 
 let Controller = {};
 
+Controller.signIn = async (request) => {
+    let postData = await request.json();
 
-// Controller.getItems = async (request) => {
-//     const searchParams = request.nextUrl.searchParams;
-//     let page = searchParams.get('page') ? searchParams.get('page') : 1;
-//     const listPerPage = searchParams.get('limit') ? searchParams.get('limit') : 10;
-//     const type = searchParams.get('type') ? searchParams.get('type') : "";
-//     let keyword = searchParams.get('keyword') ? searchParams.get('keyword').trim() : '';
+    const validateFields = [
+        "email",
+        "password"
+    ];
 
-//     try {
-//         page = parseInt(page);
-//         let limit = parseInt(listPerPage);
-//         let skip = (page - 1) * limit;
-//         let query = {};
+    try {
+        let response = await Common.requestFieldsValidation(
+            validateFields,
+            postData
+        );
+        if (response.status) {
+            console.log("email", postData.email)
+            let email = postData.email.toLowerCase();
+            let user = await User.findOne({ "email": email });
+            console.log("user", user)
+            if (user) {
+                return { message: "Login Successfully.", status: "success" };
+                // const checkPassword = await bcrypt.compare(password, user.password);
+                // if (!checkPassword) {
+                //     throw new Error("Invalid credentials");
+                // }
+            } else {
+                throw new Error("Invalid credentials");
+            }
 
+        } else {
 
-//         if (type) {
-//             query["type"] = type
-//         }
+            return { message: "Something went wrong.", status: "error" };
+        }
+    } catch (error) {
+        console.log("error", error.message)
+        return { message: error.message, status: "error" };
+    }
+}
 
-//         if (keyword) {
-//             query = {
-//                 $or: [
-//                     { name: { $regex: keyword, $options: 'i' } },
-//                 ]
-//             }
-//         }
+Controller.signUp = async (request) => {
+    let postData = await request.json();
 
-//         let result = [];
-//         if (listPerPage == -1) {
-//             result = await InvItem.find(query).populate('measuringUnit')
-//                 .sort({ createdAt: 1 });
-//         } else {
-//             result = await InvItem.find(query).populate('measuringUnit')
-//                 .limit(limit)
-//                 .skip(skip)
-//                 .sort({ createdAt: 1 });
-//         }
+    const validateFields = [
+        "first_name",
+        "last_name",
+        "email",
+        "password"
+    ];
 
-//         let totalCounts = await InvItem.find(query).countDocuments();
-//         let pageCounts = Math.ceil(totalCounts / limit);
+    try {
+        let response = await Common.requestFieldsValidation(
+            validateFields,
+            postData
+        );
+        if (response.status) {
+            let email = postData.email.toLowerCase();
+            let user = await User.findOne({ email });
+            if (user) {
+                return { message: "User Already Registered", status: "error" };
+            } else {
+                let obj = {
+                    first_name: postData.first_name,
+                    last_name: postData.last_name,
+                    email: postData.email,
+                    password: postData.password
+                }
+                let record = await User.create(obj)
+                if (record) {
+                    return { message: "Login Successfully.", status: "success" };
+                }
+            }
+        } else {
+            return { message: "Something went wrong.", status: "error" };
+        }
+    } catch (error) {
+        return { message: error.message, status: "error" };
+    }
+}
 
-//         return {
-//             status: "success",
-//             data: result,
-//             totalCounts: totalCounts,
-//             pageCounts: pageCounts,
-//             currentPage: page,
-//             perPage: limit,
-//         };
-//     } catch (error) {
-//         return { message: error.message, status: "error" };
-//     }
-// };
+Controller.getAdminModuleById = async (request) => {
+    const searchParams = request.nextUrl.searchParams;
+    let id = searchParams.get('id');
+
+    try {
+        if (!id) {
+            return {
+                status: "error",
+                message: "Something went wrong"
+            };
+        } else {
+            let record = await Admin.findOne({ _id: id });
+            if (record) {
+                return { status: "success", data: record };
+            } else {
+                return { status: "error", data: record };
+            }
+        }
+    } catch (error) {
+        console.log("error", error)
+        return { message: error.message, status: "error" };
+    }
+}
+
 
 Controller.updateAdminModule = async (request) => {
     await dbConnection();

@@ -12,8 +12,10 @@ export async function GET(request, { params }) {
   const slug = params.slug;
 
   switch (slug) {
-    case "getItems":
-      output = await Controller.getItems(request);
+   
+
+    case "getadminmodule":
+      output = await Controller.getAdminModuleById(request);
       break;
 
     default:
@@ -34,6 +36,15 @@ export async function POST(request, { params }) {
   const slug = params.slug;
 
   switch (slug) {
+
+    case "signin":
+      output = await Controller.signIn(request);
+      break;
+
+    case "signup":
+      output = await Controller.signUp(request);
+      break;
+
     case "updateadminmodule":
       output = await Controller.updateAdminModule(request);
       break;

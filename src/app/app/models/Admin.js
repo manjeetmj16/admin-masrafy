@@ -1,8 +1,8 @@
 import mongoose, { Schema, model } from "mongoose";
 
 const adminSchema = new Schema(
-  {
-    
+    {
+        user_id: { type: Schema.Types.ObjectId, ref: "User" },
         banner: {
             heading: String,
             paragragph: String,
@@ -43,20 +43,20 @@ const adminSchema = new Schema(
             heading: String,
             paragragph: String,
             banner_image: String,
-            primary_btntext : String,
-            secondary_btntext : String
+            primary_btntext: String,
+            secondary_btntext: String
         },
 
         know_more_section: {
             heading: String,
             paragragph: String,
             banner_image: String,
-            button_text : String,
+            button_text: String,
         },
-  },
-  {
-    timestamps: true,
-  }
+    },
+    {
+        timestamps: true,
+    }
 );
 
 const Admin = mongoose.models.Admins || model("Admins", adminSchema);
