@@ -4,89 +4,60 @@ const adminSchema = new Schema(
   {
     
         banner: {
-            heading: { type: String, require: true },
-            paragragph: { type: String, require: true },
-            banner_image: { type: String, require: true },
-            feature_text1: { type: String, require: true },
-            feature_text2: { type: String, require: true },
-            feature_text3: { type: String, require: true },
-            feature_text4: { type: String, require: true },
-            primary_btntext: { type: String, require: true },
-            secondary_btntext: { type: String, require: true },
+            heading: String,
+            paragragph: String,
+            banner_image: String,
+            feature_text1: String,
+            feature_text2: String,
+            feature_text3: String,
+            feature_text4: String,
+            primary_btntext: String,
+            secondary_btntext: String,
         },
 
-        afterBanner: {
-            heading1: { type: String, require: true },
-            paragragph1: { type: String, require: true },
-            heading2: { type: String, require: true },
-            paragragph2: { type: String, require: true },
-            heading3: { type: String, require: true },
-            paragragph3: { type: String, require: true },
-            heading4: { type: String, require: true },
-            paragragph4: { type: String, require: true },
+        after_banner: {
+            heading1: String,
+            paragragph1: String,
+            heading2: String,
+            paragragph2: String,
+            heading3: String,
+            paragragph3: String,
+            heading4: String,
+            paragragph4: String,
         },
 
-        services: {
-            main_heading: { type: String, require: true },
-            main_paragragph: { type: String, require: true },
-            service01_heading: { type: String, require: true },
-            service01_paragragph: { type: String, require: true },
-            service02_heading: { type: String, require: true },
-            service02_paragragph: { type: String, require: true },
-            service03_heading: { type: String, require: true },
-            service03_paragragph: { type: String, require: true },
-            service04_heading: { type: String, require: true },
-            service04_paragragph: { type: String, require: true },
+        service: {
+            main_heading: String,
+            main_paragragph: String,
+            service01_heading: String,
+            service01_paragragph: String,
+            service02_heading: String,
+            service02_paragragph: String,
+            service03_heading: String,
+            service03_paragragph: String,
+            service04_heading: String,
+            service04_paragragph: String,
         },
 
         ads: {
-            heading: { type: String, require: true },
-            paragragph: { type: String, require: true },
-            banner_image: { type: String, require: true },
-            primary_btntext : { type: String, require: true },
-            secondary_btntext : { type: String, require: true }
+            heading: String,
+            paragragph: String,
+            banner_image: String,
+            primary_btntext : String,
+            secondary_btntext : String
         },
 
-        knowMoreSection: {
-            heading: { type: String, require: true },
-            paragragph: { type: String, require: true },
-            banner_image: { type: String, require: true },
-            button_text : { type: String, require: true },
+        know_more_section: {
+            heading: String,
+            paragragph: String,
+            banner_image: String,
+            button_text : String,
         },
-
-        Footer: {
-            status: {
-                type: Number,
-                enum: [1, 0],
-                default: 0
-            },
-            number: String,
-            issueDate: Date,
-            expireDate: Date,
-            issuePlace: String,
-            ecrStatus: {
-                type: String,
-                enum: passportECRStatusEnum,
-                default: PassportECRStatus[0].value
-            }
-        },
-
-        files: [
-            {
-                name: { type: String },
-                figure: String,
-                mediaFile: {
-                    key: String,
-                    URL: String
-                }
-            }
-        ],
-
   },
   {
     timestamps: true,
   }
 );
 
-const Admin = mongoose.models.Admin || model("Admin", adminSchema);
+const Admin = mongoose.models.Admins || model("Admins", adminSchema);
 export default Admin;

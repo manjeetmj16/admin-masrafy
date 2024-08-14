@@ -1,5 +1,8 @@
 import React from 'react'
 import Header from '../component/header'
+import dbConnection from '../utils/dbconnects'
+
+await dbConnection();
 
 const layout = ({children}) => {
     return (
