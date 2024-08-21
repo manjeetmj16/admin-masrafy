@@ -1,14 +1,34 @@
-import React from 'react'
-import { Accordion } from 'react-bootstrap'
-import { useForm } from 'react-hook-form'
+import React, { useEffect, useState } from 'react';
+import { Accordion } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 
-const AfterBanner = () => {
-    const { register, handleSubmit, formState: { errors, isValid } } = useForm({
+const AfterBanner = (props) => {
+    const [formData, setFormData] = useState({});
+    const { register, handleSubmit, setValue, formState: { errors, isValid } } = useForm({
         mode: 'onChange',
     });
+
+    useEffect(() => {
+        if (!props?.afterBannerData) return;
+
+        const fields = [
+            { heading: "headingone", paragraph: "paragraphone", dataHeading: "heading1", dataParagraph: "paragragph1" },
+            { heading: "headingtwo", paragraph: "paragraphtwo", dataHeading: "heading2", dataParagraph: "paragragph2" },
+            { heading: "headingthree", paragraph: "paragraphthree", dataHeading: "heading3", dataParagraph: "paragragph3" },
+            { heading: "headingfour", paragraph: "paragraphfour", dataHeading: "heading4", dataParagraph: "paragragph4" },
+        ];
+
+        fields.forEach(field => {
+            setValue(field.heading, props.afterBannerData[field.dataHeading]);
+            setValue(field.paragraph, props.afterBannerData[field.dataParagraph]);
+        });
+
+        setFormData(props.afterBannerData);
+    }, [props, setValue]);
+
     const onSubmit = (data) => {
-        console.log(data);
-        let updateData = {
+        const afterBannerData = {
+            id: "66bcabaf1c3b7962e9311446",
             heading1: data.headingone,
             paragragph1: data.paragraphone,
             heading2: data.headingtwo,
@@ -20,118 +40,82 @@ const AfterBanner = () => {
             type: "afterBanner"
         };
 
-        fetch('http://localhost:3000/api/admin/updateadminmodule',
-        {
+        fetch('http://localhost:3000/api/admin/updateadminmodule', {
             method: 'post',
             headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(updateData)
+            body: JSON.stringify(afterBannerData)
         })
-        .then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            console.log("data",data)
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data
         });
     };
 
-    return (
-    <>
-        <Accordion.Item eventKey="1">
-            <Accordion.Header>After Banner</Accordion.Header>
-            <Accordion.Body>
-            <div className='mas_form_wrapper'>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='row'>
-                        <div className='col-lg-12'>
-                            <label>Info Text 01</label>
-                            <div className='row'>
-                                <div className='col-lg-6'>
-                                    <div className='mas_input_box'>
-                                        <label>Heading</label>
-                                        <input type="text" placeholder='Heading Here'{...register('headingone', { required: true })} />
-                                        {errors.name && <p>Required</p>}
-                                    </div>
-                                </div>
-                                <div className='col-lg-6'>
-                                    <div className='mas_input_box'>
-                                        <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph Here'{...register('paragraphone', { required: true })} />
-                                        {errors.name && <p>Required</p>}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-lg-12'>
-                            <label>Info Text 02</label>
-                            <div className='row'>
-                                <div className='col-lg-6'>
-                                    <div className='mas_input_box'>
-                                        <label>Heading</label>
-                                        <input type="text" placeholder='Heading Here'{...register('headingtwo', { required: true })} />
-                                        {errors.name && <p>Required</p>}
-                                    </div>
-                                </div>
-                                <div className='col-lg-6'>
-                                    <div className='mas_input_box'>
-                                        <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph Here'{...register('paragraphtwo', { required: true })} />
-                                        {errors.name && <p>Required</p>}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-lg-12'>
-                            <label>Info Text 03</label>
-                            <div className='row'>
-                                <div className='col-lg-6'>
-                                    <div className='mas_input_box'>
-                                        <label>Heading</label>
-                                        <input type="text" placeholder='Heading Here'{...register('headingthree', { required: true })} />
-                                        {errors.name && <p>Required</p>}
-                                    </div>
-                                </div>
-                                <div className='col-lg-6'>
-                                    <div className='mas_input_box'>
-                                        <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph Here'{...register('paragraphthree', { required: true })} />
-                                        {errors.name && <p>Required</p>}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-lg-12'>
-                            <label>Info Text 04</label>
-                            <div className='row'>
-                                <div className='col-lg-6'>
-                                    <div className='mas_input_box'>
-                                        <label>Heading</label>
-                                        <input type="text" placeholder='Heading Here'{...register('headingfour', { required: true })} />
-                                        {errors.name && <p>Required</p>}
-                                    </div>
-                                </div>
-                                <div className='col-lg-6'>
-                                    <div className='mas_input_box'>
-                                        <label>Paragraph</label>
-                                        <input type="text" placeholder='Paragraph Here'{...register('paragraphfour', { required: true })} />
-                                        {errors.name && <p>Required</p>}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-lg-12'>
-                            <div className='mas_btn_wrapper'>
-                                <button type='submit' className='mas_btn' disabled={!isValid}>Save Changes</button>
-                            </div>
+    const renderFields = () => {
+        const fields = [
+            { label: "Info Text 01", heading: "headingone", paragraph: "paragraphone" },
+            { label: "Info Text 02", heading: "headingtwo", paragraph: "paragraphtwo" },
+            { label: "Info Text 03", heading: "headingthree", paragraph: "paragraphthree" },
+            { label: "Info Text 04", heading: "headingfour", paragraph: "paragraphfour" },
+        ];
+
+        return fields.map((field, index) => (
+            <div className='col-lg-12' key={index}>
+                <label>{field.label}</label>
+                <div className='row'>
+                    <div className='col-lg-6'>
+                        <div className='mas_input_box'>
+                            <label>Heading</label>
+                            <input 
+                                type="text" 
+                                defaultValue={props?.afterBannerData?.[field.heading]} 
+                                placeholder='Heading Here' 
+                                {...register(field.heading, { required: true })} 
+                            />
+                            {errors[field.heading] && <p>Required</p>}
                         </div>
                     </div>
-                </form>
+                    <div className='col-lg-6'>
+                        <div className='mas_input_box'>
+                            <label>Paragraph</label>
+                            <input 
+                                type="text" 
+                                defaultValue={props?.afterBannerData?.[field.paragraph]} 
+                                placeholder='Paragraph Here' 
+                                {...register(field.paragraph, { required: true })} 
+                            />
+                            {errors[field.paragraph] && <p>Required</p>}
+                        </div>
+                    </div>
+                </div>
             </div>
-            </Accordion.Body>
-        </Accordion.Item>
-    </>
-    )
+        ));
+    };
+
+    return (
+        <>
+            <Accordion.Item eventKey="1">
+                <Accordion.Header>After Banner</Accordion.Header>
+                <Accordion.Body>
+                    <div className='mas_form_wrapper'>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <div className='row'>
+                                {renderFields()}
+                                <div className='col-lg-12'>
+                                    <div className='mas_btn_wrapper'>
+                                        <button type='submit' className='mas_btn' disabled={!isValid}>Save Changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </Accordion.Body>
+            </Accordion.Item>
+        </>
+    );
 }
 
-export default AfterBanner
+export default AfterBanner;
