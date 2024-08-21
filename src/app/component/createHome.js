@@ -15,7 +15,7 @@ const home = () => {
   // console.log(userdata?.data?.afterBanner,"userdata")
   
   useEffect(()=>{
-    handleGetbannerData();
+    // handleGetbannerData();
   },[])
   
   const handleGetbannerData=async()=>{
@@ -28,11 +28,11 @@ const home = () => {
       },
     })
     const data = await response.json();
-    setUserData(data)
+    // setUserData(data)
   }
 
   useEffect(()=>{
-    handleGetAfterbannerData();
+    // handleGetAfterbannerData();
   },[])
 
   const handleGetAfterbannerData=async()=>{
@@ -51,7 +51,7 @@ const home = () => {
 
 
   useEffect(()=>{
-    handleGetServicesData();
+    // handleGetServicesData();
   },[])
 
   const handleGetServicesData=async()=>{
@@ -69,7 +69,7 @@ const home = () => {
   }
 
   useEffect(()=>{
-    handleGetAdsData();
+    // handleGetAdsData();
   },[])
 
   const handleGetAdsData=async()=>{
@@ -88,7 +88,7 @@ const home = () => {
 
 
   useEffect(()=>{
-    handleGetKnowMoreData();
+    // handleGetKnowMoreData();
   },[])
 
   const handleGetKnowMoreData=async()=>{
