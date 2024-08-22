@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import './globals.css'
 
 const LoginPage = () => {
   const [showToaster, setShowToaster] = useState(false);
@@ -14,7 +15,7 @@ const LoginPage = () => {
     if (data.email === validEmail && data.password === validPassword) {
       setToasterSuccess(true);
       setShowToaster(true);
-      router.push("/app/home");
+      router.push("/home");
     } else {
       setToasterSuccess(false);
       setShowToaster(true);

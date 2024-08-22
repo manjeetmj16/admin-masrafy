@@ -1,7 +1,9 @@
 
-import Common from "@/app/app/helper.js/Common";
-import Admin from "@/app/app/models/Admin";
-import User from "@/app/app/models/User";
+
+// import Common from "@/app/helper.js/Common";
+import Common from "@/app/helper.js/Common";
+import Admin from "@/app/models/Admin";
+import User from "@/app/models/User";
 import dbConnection from '@/app/utils/dbconnects'
 
 let banner = ["heading", "paragragph", "banner_image", "feature_text1", "feature_text2", "feature_text3", "feature_text4", "primary_btntext", "secondary_btntext"]
@@ -119,9 +121,7 @@ Controller.updateAdminModule = async (request) => {
     await dbConnection();
     let postData = await request.json();
     let validateFields = []
-
-    // console.log("postData",postData)
-
+    console.log("postData.type",postData.type)
     if (postData.type == "banner") {
         validateFields = banner
     } else if (postData.type == "afterBanner") {
@@ -134,6 +134,8 @@ Controller.updateAdminModule = async (request) => {
         validateFields = knowMoreSection
     }
 
+    // console.log("api calling")
+
     try {
         let response = await Common.requestFieldsValidation(
             validateFields,
@@ -143,6 +145,7 @@ Controller.updateAdminModule = async (request) => {
         if (response.status) {
             if (!postData?.id) {
                 if (postData?.type == "banner") {
+                   
                     let bannerData = {
                         heading: postData.heading,
                         paragragph: postData.paragragph,

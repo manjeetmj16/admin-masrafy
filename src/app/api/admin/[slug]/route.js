@@ -3,11 +3,6 @@ import { NextResponse } from "next/server";
 import Controller from "./controller";
 
 export async function GET(request, { params }) {
-  // const authResult = await Authetication(request);
-  // if (authResult?.status && authResult.status == "error") {
-  //   return NextResponse.json(authResult);
-  // }
-
   let output = { status: "error", message: "No route found" };
   const slug = params.slug;
 
@@ -26,12 +21,6 @@ export async function GET(request, { params }) {
 }
 
 export async function POST(request, { params }) {
-    // console.log("call api")
-  // const authResult = await Authetication(request);
-  // if (authResult?.status && authResult.status == "error") {
-  //   return NextResponse.json(authResult);
-  // }
-
   let output = { status: "error", message: "No route found" };
   const slug = params.slug;
 

@@ -43,9 +43,10 @@ const Services = (props) => {
 
   const onSubmit = (data) => {
     let ServicesData = {
-      id: "66bcabaf1c3b7962e9311446",
+      // id: "66bcabaf1c3b7962e9311446",
       main_heading: data.mainheading,
       main_paragragph: data.mainparagraph,
+      type : "service"
     };
 
     for (let i = 1; i <= 4; i++) {

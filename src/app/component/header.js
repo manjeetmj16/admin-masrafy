@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const header = () => {
+const Header = () => {
   return (
     <>
         <div className='mas_header_wrapper'>
@@ -38,4 +38,4 @@ const header = () => {
   )
 }
 
-export default header
+export default Header
